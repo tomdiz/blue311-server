@@ -45,4 +45,14 @@ npm run initdb
 npm start
 ```
 
+## Mongo DB npm commands
 
+*npm start* : "node server.js"
+*npm build* : "npm run initdb"
+*npm flushdb* : node bin/flushdb.js". Cleans out the database
+*npm initdb* : "node bin/bootstrap.js"
+
+
+## Good Node.js coding sites
+
+* https://blog.openshift.com/set-up-nodejs-mongodb-and-express-on-free-spatial-web-hosting/

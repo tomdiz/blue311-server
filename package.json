@@ -1,6 +1,6 @@
 {
-  "name": "MongoDB-USParks",
-  "description": "A simple mapping application for finding US National Parks and Historic Sites, powered by MongoDB and Leaflet maps",
+  "name": "blue311-Server",
+  "description": "A simple map viewing web application and REST client for blue311 iOS clients, powered by MongoDB and Leaflet maps. This supports finding parking spaces, building entrances and general information point on a map. You can also add comments to map points.",
   "version": "0.1.0",
   "private": false,
   "engines": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryanj/restify-postGIS.git"
+    "url": "https://github.com/tomdiz/blue311-server.git"
   },
   "scripts": {
     "start": "node server.js",

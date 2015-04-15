@@ -2,7 +2,7 @@ var cc          = require('config-multipaas'),
     mongojs     = require('mongojs');
 
 var config      = cc({ 
-  collection_name : process.env.COLLECTION_NAME || process.env.OPENSHIFT_APP_NAME || 'parks'
+  collection_name : process.env.COLLECTION_NAME || process.env.OPENSHIFT_APP_NAME || 'blue311-server-app'
 })
 var db_config        = config.get('MONGODB_DB_URL'),
     collection_name  = config.get('collection_name');
