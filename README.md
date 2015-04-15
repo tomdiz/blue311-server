@@ -46,6 +46,3 @@ npm start
 ```
 
 
-TODO: 
-- No test detain mongoldb after npminstall
-- Does adding data using the client work?
