@@ -33,6 +33,12 @@ http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.137858808
 npm install
 ```
 
+* Importing partial data into mongo db
+
+```
+npm run initdb
+```
+
 * Run server. to test open a browser tab and open ‘localhost:8080’
 
 ```
