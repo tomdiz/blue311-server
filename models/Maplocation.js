@@ -12,7 +12,7 @@ var MapLocationSchema = new mongoose.Schema({
   loc: {
     type: [Number],  // [<longitude>, <latitude>]
     index: '2d'      // create the geospatial index
-  }
+  },
   created: Date
 });
 
