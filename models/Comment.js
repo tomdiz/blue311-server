@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CommentsSchema = new mongoose.Schema({
   user_handle: String,
-  b311MapDataLocationId: String,
+  location_id: String,
   subject: String,
   body: String,
   rating_down: Number,

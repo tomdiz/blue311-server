@@ -6,14 +6,14 @@ var cc          = require('config-multipaas'),
 var config      = cc(),
     app         = restify.createServer()
 
-var todos = require('./routes/comments');
-var todos = require('./routes/maplocations');
+//var comments = require('./routes/comments');
+//var maplocations = require('./routes/maplocations');
 
 app.use(restify.queryParser())
 app.use(restify.CORS())
 app.use(restify.fullResponse())
-app.use('/v1/comments', comments);
-app.use('/v1/maplocations', comments);
+//app.use('/v1/comments', comments);
+//app.use('/v1/maplocations', maplocations);
 
 // Routes
 app.get('/parks/within', db.selectBox);

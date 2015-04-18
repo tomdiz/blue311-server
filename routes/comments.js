@@ -6,18 +6,11 @@ var Comment = require('../models/Comment.js');
 
 /* GET /comments for location id. */
 router.get('/', function(req, res, next) {
-
-/*
-  Comment.find(function (err, comments) {
-    if (err) return next(err);
-    res.json(comments);
-  });
-*/
   //clean these variables:
   var query = req.query;
-  var location_id = Number(query.location_id);
+  var location_id = String(query.location_id);
   var limit = (typeof(query.limit) !== "undefined") ? query.limit : 40;
-  if(!(Number(query.location_id))
+  if(!(String(query.location_id)))
   {
     res.send(500, {http_status:400,error_msg: "this endpoint requires a location_id: location_id\na query 'limit' parameter can be optionally specified as well."});
     return console.error('could not connect to the database', err);

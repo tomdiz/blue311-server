@@ -16,4 +16,4 @@ var MapLocationSchema = new mongoose.Schema({
   created: Date
 });
 
-module.exports = mongoose.model('Maplocations', CommentsSchema);
+module.exports = mongoose.model('Maplocations', MapLocationSchema);

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Comment = require('../models/Maplocation.js');
+var Maplocation = require('../models/Maplocation.js');
 
 /* GET /maplocations. */
 router.get('/', function(req, res, next) {
@@ -26,7 +26,7 @@ router.get('/within', function(req, res, next) {
   var query = req.query;
   var lat = Number(query.lat),
       lon = Number(query.radius),
-      radius = Number(query.lon),
+      radius = Number(query.lon);
   var limit = (typeof(query.limit) !== "undefined") ? query.limit : 40;
   if(!(Number(query.lat) 
     && Number(query.lon) 

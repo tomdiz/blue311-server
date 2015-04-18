@@ -48,7 +48,7 @@ function select_radius(req, res, next) {
   var query = req.query;
   var lat = Number(query.lat),
       lon = Number(query.radius),
-      radius = Number(query.lon),
+      radius = Number(query.lon);
   var limit = (typeof(query.limit) !== "undefined") ? query.limit : 40;
   if(!(Number(query.lat) 
     && Number(query.lon) 
