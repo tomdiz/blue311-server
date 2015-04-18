@@ -3,8 +3,8 @@ var cc          = require('config-multipaas'),
     fs          = require('fs'),
     db          = require('./bin/db.js')
 
-var config      = cc(),
-    app         = restify.createServer()
+var config      = cc();
+var app         = restify.createServer()
 
 //var comments = require('./routes/comments');
 //var maplocations = require('./routes/maplocations');
