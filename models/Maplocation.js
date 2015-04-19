@@ -8,10 +8,10 @@ var MapLocationSchema = new mongoose.Schema({
   zip: String,
   rating_down: Number,
   mtype: Number,
-  inUse: Boolean,
+  inUse: Number,		// 1 == full, 0 == empty
   loc: {
-    type: [Number],  // [<longitude>, <latitude>]
-    index: '2d'      // create the geospatial index
+    type: [Number],		// [<longitude>, <latitude>]
+    index: '2d'			// create the geospatial index
   },
   created: Date
 });

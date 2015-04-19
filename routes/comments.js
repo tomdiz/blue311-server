@@ -12,12 +12,14 @@ router.get('/', function(req, res, next) {
   var limit = (typeof(query.limit) !== "undefined") ? query.limit : 40;
   if(!(String(query.location_id)))
   {
-    res.send(500, {http_status:400,error_msg: "this endpoint requires a location_id: location_id\na query 'limit' parameter can be optionally specified as well."});
+    //res.send(500, {http_status:400,error_msg: "This endpoint requires a location_id: location_id\na query 'limit' parameter can be optionally specified as well."});
+    res.status(500).send({http_status:400,error_msg: "This endpoint requires a location_id: location_id\na query 'limit' parameter can be optionally specified as well."});
     return console.error('could not connect to the database', err);
   }
   db[collection_name].find( {"location_id" : location_id}).limit(limit).toArray(function(err,rows) {
     if(err) {
-      res.send(500, {http_status:500,error_msg: err})
+      //res.send(500, {http_status:500,error_msg: err})
+      res.status(500).send({http_status:500,error_msg: err});
       return console.error('error running query', err);
     }
     res.send(rows);

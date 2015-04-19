@@ -33,12 +33,14 @@ router.get('/around', function(req, res, next) {
     && Number(query.radius) 
     && Number(limit)))
   {
-    res.send(500, {http_status:400,error_msg: "this endpoint requires a lat, long coordinate and radius: lat lon radius\na query 'limit' parameter can be optionally specified as well."});
-    return console.error('could not connect to the database', err);
+    //res.send(500, {http_status:400,error_msg: "This endpoint requires a lat, long coordinate and radius: lat long radius\na query 'limit' parameter can be optionally specified as well."});
+    res.status(500).send({http_status:400,error_msg: "This endpoint requires a lat, long coordinate and radius: lat long radius\na query 'limit' parameter can be optionally specified as well."});
+    return console.error('Could not connect to the database', err);
   }
   db[collection_name].find( {"pos" : {'$geoWithin': { '$centerSphere': [[lon,lat],radius]}}}).limit(limit).toArray(function(err,rows) {
     if(err) {
-      res.send(500, {http_status:500,error_msg: err})
+      //res.send(500, {http_status:500,error_msg: err})
+      res.status(500).send({http_status:500,error_msg: err});
       return console.error('error running query', err);
     }
     res.send(rows);
@@ -60,13 +62,15 @@ router.get('/within', function(req, res, next) {
     && Number(query.lon2)
     && Number(limit)))
   {
-    res.send(500, {http_status:400,error_msg: "this endpoint requires two pair of lat, long coordinates: lat1 lon1 lat2 lon2\na query 'limit' parameter can be optionally specified as well."});
-    return console.error('could not connect to the database', err);
+    //res.send(500, {http_status:400,error_msg: "This endpoint requires two pair of lat, long coordinates: lat1 lon1 lat2 lon2\na query 'limit' parameter can be optionally specified as well."});
+    res.status(500).send({http_status:400,error_msg: "This endpoint requires two pair of lat, long coordinates: lat1 lon1 lat2 lon2\na query 'limit' parameter can be optionally specified as well."});
+    return console.error('Could not connect to the database', err);
   }
   db[collection_name].find( {"pos" : {'$geoWithin': { '$box': [[lon1,lat1],[lon2,lat2]]}}}).limit(limit).toArray(function(err,rows) {
     if(err) {
-      res.send(500, {http_status:500,error_msg: err})
-      return console.error('error running query', err);
+      //res.send(500, {http_status:500,error_msg: err})
+      res.status(500).send({http_status:500,error_msg: err});
+      return console.error('Error running query', err);
     }
     res.send(rows);
     return rows;
