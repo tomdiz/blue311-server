@@ -118,6 +118,8 @@ To run application locally
 % foreman start web
 ```
 
+To test open browser to http://localhost:5000
+
 To push changes to heroku (Do a git push to push to my github account first)
 ```
 % git push heroku master
