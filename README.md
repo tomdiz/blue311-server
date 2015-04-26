@@ -103,4 +103,29 @@ mongo blue311App --eval "db.dropDatabase()"
 ```
 
 
+# Heroku Info
+
+You need to install heroku
+* https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
+
+View Heroku log files on server run this command from the server directory in a terminal window
+```
+% heroku logs --tail
+```
+
+To run application locally
+```
+% foreman start web
+```
+
+To push changes to heroku (Do a git push to push to my github account first)
+```
+% git push heroku master
+```
+
+To open from heroku server use
+```
+% heroku open
+```
+
 
