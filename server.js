@@ -17,6 +17,7 @@ mongoose.connect(database_location, function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
+        console.log('Connect to DB: %s', database_location);
         console.log('connection successful');
     }
 });
