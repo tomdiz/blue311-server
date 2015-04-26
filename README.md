@@ -130,4 +130,18 @@ To open from heroku server use
 % heroku open
 ```
 
+Need to use the MongoDB add-on
+```
+% heroku addons:add mongolab
+```
+
+Heroku MongoDB admin UI
+Usage URL
+
+* https://devcenter.heroku.com/articles/mongolab#using-mongolab-s-admin-tools-for-mongodb
+
+```
+% heroku addons:open mongolab
+```
+
 
