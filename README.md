@@ -144,4 +144,17 @@ Usage URL
 % heroku addons:open mongolab
 ```
 
+To figure out MongoDB on heroku use
+```
+% heroku config | grep MONGOLAB_URI
+```
+
+It will return a config variable:
+MONGOLAB_URI: mongodb://heroku_app36269540:9gic06nkh35ah5ubute53rsr93@ds061671.mongolab.com:61671/heroku_app36269540
+
+To view all config (environment variables) use
+```
+% heroku config
+```
+
 

@@ -10,8 +10,10 @@ var routes = require('./routes/index');
 var comments = require('./routes/comments');
 var maplocations = require('./routes/maplocations');
 
+var database_location = process.env.MONGOLAB_URI || 'mongodb://localhost/blue311App';
+
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blue311App', function(err) {
+mongoose.connect(database_location, function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
