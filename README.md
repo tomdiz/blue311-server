@@ -59,7 +59,7 @@ npm start
 
 
 
-## Open Mongo command line with basic commands
+## MongoDB basic commands
 URL to basic command shell
 
 * http://docs.mongodb.org/manual/reference/mongo-shell/
