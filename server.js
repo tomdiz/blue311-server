@@ -7,7 +7,6 @@ var cc = require('config-multipaas');
 var config = cc();
 
 var routes = require('./routes/index');
-
 var comments = require('./routes/comments');
 var maplocations = require('./routes/maplocations');
 

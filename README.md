@@ -56,3 +56,51 @@ npm start
 ## Good Node.js coding sites
 
 * https://blog.openshift.com/set-up-nodejs-mongodb-and-express-on-free-spatial-web-hosting/
+
+
+
+## Open Mongo command line with basic commands
+URL to basic command shell
+
+* http://docs.mongodb.org/manual/reference/mongo-shell/
+* http://docs.mongodb.org/manual/tutorial/getting-started-with-the-mongo-shell/
+
+% mongo
+Then goes to “>” command lines
+
+List all databases in MongoDB
+```
+> show dbs
+```
+
+Show commands:
+```
+> help 
+> use blue311App; 
+> db.dropDatabase();
+{ "ok" : 1 }
+```
+
+Last line is reply when drop DB successful
+
+To leave mango db command line
+
+```
+> exit
+```
+
+To show data 
+
+```
+> db["blue311App"].find()
+```
+
+
+# Clean blue311App Mongo DB from Unix command line:
+
+```
+mongo blue311App --eval "db.dropDatabase()"
+```
+
+
+

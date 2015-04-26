@@ -7,7 +7,7 @@ var CommentsSchema = new mongoose.Schema({
   body: String,
   rating_down: Number,
   rating_up: Number,
-  created: Date
+  created: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Comments', CommentsSchema);
+module.exports = mongoose.model('Comment', CommentsSchema);

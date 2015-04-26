@@ -9,11 +9,10 @@ var MapLocationSchema = new mongoose.Schema({
   rating_down: Number,
   mtype: Number,
   inUse: Number,		// 1 == full, 0 == empty
-  loc: {
-    type: [Number],		// [<longitude>, <latitude>]
-    index: '2d'			// create the geospatial index
-  },
-  created: Date
+  longitude: Number,
+  latitude: Number,
+  created: {type: Date, default: Date.now},
+  geo: {type: [Number], index: '2d'}
 });
 
-module.exports = mongoose.model('Maplocations', MapLocationSchema);
+module.exports = mongoose.model('Maplocation', MapLocationSchema);
