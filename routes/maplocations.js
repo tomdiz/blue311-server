@@ -14,20 +14,26 @@ router.get('/', function(req, res, next) {
 
 /* POST /maplocations */
 router.post('/', function(req, res, next) {
-/*
-  Maplocation.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-*/
-    console.log('POST /maplocations called');
-    var maploc = new Maplocation({title: req.params.title, address: req.params.address, city: req.params.city, state: req.params.state, zip: req.params.zip, mtype: req.params.location_type, inUse: req.params.inUse, longitude: req.params.longitude, latitude: req.params.latitude});
-    maploc.save(function (err) {
-        if (err) throw err;
-        console.log('Maplocation saved.');
+  console.log('POST /maplocations called');
+  console.log('latitude: %d', req.body.latitude);
+  console.log('longitude: %d', req.body.longitude);
+  console.log('title: %s', req.body.title);
+  console.log('address: %s', req.body.address);
+  console.log('city: %s', req.body.city);
+  console.log('state: %s', req.body.state);
+  console.log('zip: %s', req.body.zip);
+  console.log('location_type: %s', req.body.location_type);
+  console.log('inUse: %s', req.body.inUse);
+  var maploc = new Maplocation({title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude});
+  maploc.save(function (err) {
+    if (err) {
+      console.log('Maplocation save ERROR');
+      console.log(err);
+      return next(err);
+    }
  
-        res.send('Maplocation saved.');
-    });
+    res.send('Maplocation saved');
+	});
 });
 
 /* GET /maplocations/around */
@@ -41,7 +47,7 @@ router.get('/around', function(req, res, next) {
   console.log('longitude: %d', lon);
   console.log('radius: %d', radius);
   var limit = (typeof(query.limit) !== "undefined") ? query.limit : 80;
-  console.log('limit: %s', limit);
+  //console.log('limit: %s', limit);
   if(!(Number(query.latitude) 
     && Number(query.longitude) 
     && Number(query.radius) 
@@ -99,6 +105,7 @@ router.get('/within', function(req, res, next) {
       res.status(500).send({http_status:500,error_msg: err});
       return console.error('Error running query', err);
     }
+    console.log(rows);
     res.send(rows);
     return rows;
   });
