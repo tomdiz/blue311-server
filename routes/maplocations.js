@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log('POST /v1/maplocations');
 
-  var uuid = uuid.v4();
+  var id = uuid.v4();
 
   console.log('latitude: %d', req.body.latitude);
   console.log('longitude: %d', req.body.longitude);
@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
   console.log('zip: %s', req.body.zip);
   console.log('location_type: %s', req.body.location_type);
   console.log('inUse: %s', req.body.inUse);
-  console.log('id: %s', uuid);
+  console.log('id: %s', id);
 
   var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude});
   maploc.save(function (err) {
