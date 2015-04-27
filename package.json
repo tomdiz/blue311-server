@@ -17,6 +17,7 @@
     "ejs": "~0.8.5",
     "express": "~4.9.0",
     "morgan": "~1.3.0",
+    "node-uuid": "*",
     "mongoose": "*"
   },
   "devDependencies": {

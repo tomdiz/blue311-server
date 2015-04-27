@@ -4,6 +4,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Maplocation = require('../models/Maplocation.js');
 
+var uuid = require('node-uuid');
+
 /* GET /maplocations. */
 router.get('/', function(req, res, next) {
   Maplocation.find(function (err, comments) {
@@ -14,7 +16,10 @@ router.get('/', function(req, res, next) {
 
 /* POST /maplocations */
 router.post('/', function(req, res, next) {
-  console.log('POST /maplocations called');
+  console.log('POST /v1/maplocations');
+
+  var uuid = uuid.v4();
+
   console.log('latitude: %d', req.body.latitude);
   console.log('longitude: %d', req.body.longitude);
   console.log('title: %s', req.body.title);
@@ -24,7 +29,9 @@ router.post('/', function(req, res, next) {
   console.log('zip: %s', req.body.zip);
   console.log('location_type: %s', req.body.location_type);
   console.log('inUse: %s', req.body.inUse);
-  var maploc = new Maplocation({title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude});
+  console.log('id: %s', uuid);
+
+  var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude});
   maploc.save(function (err) {
     if (err) {
       console.log('Maplocation save ERROR');
