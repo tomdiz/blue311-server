@@ -102,6 +102,22 @@ To show data
 mongo blue311App --eval "db.dropDatabase()"
 ```
 
+Init Mongo DB configuration correctly:
+
+Make sure Maplocation index "geo" 2d and shows return value:
+
+% mongo
+> use blue311App
+> db.Maplocation.ensureIndex({ geo: "2d" }
+{
+	"createdCollectionAutomatically" : true,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> exit
+
+
 
 # Heroku Info
 
@@ -156,5 +172,3 @@ To view all config (environment variables) use
 ```
 % heroku config
 ```
-
-

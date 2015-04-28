@@ -30,8 +30,14 @@ router.post('/', function(req, res, next) {
   console.log('location_type: %s', req.body.location_type);
   console.log('inUse: %s', req.body.inUse);
   console.log('id: %s', id);
-
-  var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude});
+	
+  var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude, geo: [req.body.longitude, req.body.latitude]});
+  //var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude,
+  //  geometry: {
+   //   type: 'Point',
+   //   geo: [request.body.longitude, request.body.latitude]
+   // }});
+  console.log('created the maploc object');
   maploc.save(function (err) {
     if (err) {
       console.log('Maplocation save ERROR');
@@ -39,6 +45,7 @@ router.post('/', function(req, res, next) {
       return next(err);
     }
  
+      console.log('Maplocation saved');
     res.send('Maplocation saved');
 	});
 });
@@ -64,22 +71,24 @@ router.get('/around', function(req, res, next) {
     res.status(500).send({http_status:400,error_msg: "This endpoint requires a lat, long coordinate and radius: lat long radius\na query 'limit' parameter can be optionally specified as well."});
     return console.error('Could not connect to the database', err);
   }
-  Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }, function(error, data){
-    console.log(data);
-    res.json(data);
-});
-//);
+  
+  Maplocation.find({ geo : { '$near' : [lon, lat] } }, console.log);
+  
 /*
-  Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }).limit(limit).toArray(function(err,rows) {
-    if(err) {
-      //res.send(500, {http_status:500,error_msg: err})
-      res.status(500).send({http_status:500,error_msg: err});
-      return console.error('Error running query', err);
-    }
-    res.send(rows);
-    return rows;
-  });
+      Maplocation.find({coords : { $near : [lon, lat], $maxDistance : 100/68.91}}, 
+      function (error, records) {    
+        //res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
+        //res.send('{"records":' + JSON.stringify(records) + '}');
+        console.log('{"records":' + JSON.stringify(records) + '}');
+    });
 */
+
+  Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }, function(error, locations){
+    //console.log(locations);
+    //res.json(locations);
+    res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
+    res.send('{"locations":' + JSON.stringify(locations) + '}');
+});
 //  Maplocation.find({ geo : { '$near' : [lon, lat] } }, console.log);
 //  var area = { center: [lon, lat], radius: radius, unique: true }
 //  var query = Maplocation.where('geo').within().circle(area)

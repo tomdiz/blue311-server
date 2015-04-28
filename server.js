@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var comments = require('./routes/comments');
 var maplocations = require('./routes/maplocations');
 
-var database_location = process.env.MONGOLAB_URI || 'mongodb://localhost/blue311App';
+var database_location = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/blue311App';
 
 var mongoose = require('mongoose');
 mongoose.connect(database_location, function(err) {
@@ -21,7 +21,12 @@ mongoose.connect(database_location, function(err) {
         console.log('connection successful');
     }
 });
-
+// catch uncaught exceptions
+process.on('uncaughtException', function (err) {
+  if ('stack' in err) {
+    console.log(err.stack);
+  }
+});
 var app = express();
 
 // view engine setup
@@ -52,7 +57,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
+        res.status(err.status || 502);
+        console.log(err.stack);
         res.render('error', {
             message: err.message,
             error: err
@@ -63,11 +69,12 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    //res.render('error', {
-    //    message: err.message,
-    //    error: {}
-    //});
+    res.status(err.status || 501);
+    console.log(err.stack);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
