@@ -29,11 +29,33 @@ router.get('/', function(req, res, next) {
 
 /* POST /comments */
 router.post('/', function(req, res, next) {
+  console.log('POST /v1/comments');
+
+  console.log('body: %s', req.body.comment_body);
+  console.log('subject: %s', req.body.comment_subject);
+  console.log('location_id: %s', req.body.location_id);
+  console.log('user_handle: %s', req.body.user_handle);
+	
+  var comment = new Comment({user_handle: req.body.user_handle, location_id: req.body.location_id, subject: req.body.comment_subject, body: req.body.comment_body, rating_down:0, rating_up:0});
+  comment.save(function (err) {
+    if (err) {
+      console.log('Comment save ERROR');
+      console.log(err);
+      return next(err);
+    }
+ 
+    console.log('Comment saved');
+    res.send('Comment saved');
+	});
+});
+/*
+router.post('/', function(req, res, next) {
   Comment.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
+*/
 
 /* GET /comments/id */
 router.get('/:id', function(req, res, next) {

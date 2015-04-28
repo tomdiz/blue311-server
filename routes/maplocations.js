@@ -67,21 +67,11 @@ router.get('/around', function(req, res, next) {
         res.send('{"locations":' + JSON.stringify(records) + '}');
         console.log('{"locations":' + JSON.stringify(records) + '}');
     });
-  
-/*
-      Maplocation.find({coords : { $near : [lon, lat], $maxDistance : 100/68.91}}, 
-      function (error, records) {    
-        //res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
-        //res.send('{"records":' + JSON.stringify(records) + '}');
-        console.log('{"records":' + JSON.stringify(records) + '}');
-    });
-*/
 /*
   Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }, function(error, locations) {
-    //console.log(locations);
-    //res.json(locations);
-    res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
-    res.send('{"locations":' + JSON.stringify(locations) + '}');
+        res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
+        res.send('{"locations":' + JSON.stringify(records) + '}');
+        console.log('{"locations":' + JSON.stringify(records) + '}');
   });
 */
 });
