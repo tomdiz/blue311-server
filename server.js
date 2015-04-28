@@ -8,6 +8,7 @@ var config = cc();
 
 var routes = require('./routes/index');
 var comments = require('./routes/comments');
+var profiles = require('./routes/profiles');
 var maplocations = require('./routes/maplocations');
 
 var database_location = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/blue311App';
@@ -21,12 +22,7 @@ mongoose.connect(database_location, function(err) {
         console.log('connection successful');
     }
 });
-// catch uncaught exceptions
-process.on('uncaughtException', function (err) {
-  if ('stack' in err) {
-    console.log(err.stack);
-  }
-});
+
 var app = express();
 
 // view engine setup
@@ -42,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.use('/', routes);
 app.use('/v1/comments', comments);
+app.use('/v1/profiles', profiles);
 app.use('/v1/maplocations', maplocations);
 
 // catch 404 and forward to error handler
@@ -52,6 +49,13 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+// catch uncaught exceptions
+process.on('uncaughtException', function (err) {
+  if ('stack' in err) {
+    console.log(err.stack);
+  }
+});
 
 // development error handler
 // will print stacktrace
