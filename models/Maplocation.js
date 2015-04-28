@@ -1,7 +1,6 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 var MapLocationSchema = new mongoose.Schema({
-  id: String,
   title: String,
   address: String,
   city: String,

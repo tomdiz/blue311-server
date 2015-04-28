@@ -4,8 +4,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Maplocation = require('../models/Maplocation.js');
 
-var uuid = require('node-uuid');
-
 /* GET /maplocations. */
 router.get('/', function(req, res, next) {
   Maplocation.find(function (err, comments) {
@@ -18,8 +16,6 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log('POST /v1/maplocations');
 
-  var id = uuid.v4();
-
   console.log('latitude: %d', req.body.latitude);
   console.log('longitude: %d', req.body.longitude);
   console.log('title: %s', req.body.title);
@@ -29,15 +25,8 @@ router.post('/', function(req, res, next) {
   console.log('zip: %s', req.body.zip);
   console.log('location_type: %s', req.body.location_type);
   console.log('inUse: %s', req.body.inUse);
-  console.log('id: %s', id);
 	
-  var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude, geo: [req.body.longitude, req.body.latitude]});
-  //var maploc = new Maplocation({id: uuid, title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude,
-  //  geometry: {
-   //   type: 'Point',
-   //   geo: [request.body.longitude, request.body.latitude]
-   // }});
-  console.log('created the maploc object');
+  var maploc = new Maplocation({title: req.body.title, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, mtype: req.body.location_type, inUse: req.body.inUse, longitude: req.body.longitude, latitude: req.body.latitude, geo: [req.body.longitude, req.body.latitude]});
   maploc.save(function (err) {
     if (err) {
       console.log('Maplocation save ERROR');
@@ -45,7 +34,7 @@ router.post('/', function(req, res, next) {
       return next(err);
     }
  
-      console.log('Maplocation saved');
+    console.log('Maplocation saved');
     res.send('Maplocation saved');
 	});
 });
@@ -72,7 +61,12 @@ router.get('/around', function(req, res, next) {
     return console.error('Could not connect to the database', err);
   }
   
-  Maplocation.find({ geo : { '$near' : [lon, lat] } }, console.log);
+  //Maplocation.find({ geo : { '$near' : [lon, lat] } }, console.log);
+  Maplocation.find({ geo : { '$near' : [lon, lat] } }, function (error, records) {    
+        res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
+        res.send('{"locations":' + JSON.stringify(records) + '}');
+        console.log('{"locations":' + JSON.stringify(records) + '}');
+    });
   
 /*
       Maplocation.find({coords : { $near : [lon, lat], $maxDistance : 100/68.91}}, 
@@ -82,19 +76,14 @@ router.get('/around', function(req, res, next) {
         console.log('{"records":' + JSON.stringify(records) + '}');
     });
 */
-
-  Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }, function(error, locations){
+/*
+  Maplocation.find({ geo : { '$centerSphere' : [[lon, lat], radius] } }, function(error, locations) {
     //console.log(locations);
     //res.json(locations);
     res.setHeader('Content-Type', 'text/javascript;charset=UTF-8');
     res.send('{"locations":' + JSON.stringify(locations) + '}');
-});
-//  Maplocation.find({ geo : { '$near' : [lon, lat] } }, console.log);
-//  var area = { center: [lon, lat], radius: radius, unique: true }
-//  var query = Maplocation.where('geo').within().circle(area)
-//  console.log(query);
-  // alternatively
-//  query.circle('geo', area);
+  });
+*/
 });
 
 /* GET /maplocations/within */

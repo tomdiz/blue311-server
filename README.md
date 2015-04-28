@@ -45,6 +45,12 @@ npm run initdb
 npm start
 ```
 
+Start Node in debug mode
+```
+ENV=true npm start
+```
+
+
 ## Mongo DB npm commands
 
 *npm start* : "node server.js"
@@ -93,6 +99,28 @@ To show data
 
 ```
 > db["blue311App"].find()
+```
+
+Simple example to view mongo documents:
+```
+%mongo
+
+> show dbs
+admin       0.078GB
+blue311App  0.078GB
+local       0.078GB
+
+
+> use blue311App
+
+
+> show collections
+maplocations
+system.indexes
+
+Show available commands
+
+> db.maplocations.help()
 ```
 
 
